@@ -9,7 +9,7 @@ import os
 """
 
 
-def convert_to_anki1(init_file_name,tag):
+def convert_to_anki1(init_file_name, tag):
     """
     针对以下情况：
     1、每道题都是数字开头
@@ -19,15 +19,33 @@ def convert_to_anki1(init_file_name,tag):
     :param tag: anki中的标签名
     :return:
     """
-    with open(init_file_name,"r",encoding="utf-8") as conv_file:
-        with open("anki.txt","w",encoding="utf-8") as anki:
+    with open(init_file_name, "r", encoding="utf-8") as conv_file:
+        with open("anki.txt", "w", encoding="utf-8") as anki:
             for line in conv_file:
                 if line.strip().startswith("答案"):
-                    line = "\t" + line.strip()+"\t"+tag+os.linesep
+                    line = "\t" + line.strip() + "\t" + tag + os.linesep
                     print(line)
                     anki.write(line)
                 else:
                     anki.write(line.strip())
 
-convert_to_anki1("test.txt","TEST")
 
+def convert_evernote_to_anki(init_file_name, tag):
+    """
+    将Q&A笔记转换为导入anki的文件
+    :param init_file_name: 从Q&A笔记中拷贝出来的文字形成的文件
+    :param tag: anki中的标签
+    :return:
+    """
+    with open(init_file_name, 'r', encoding="utf-8") as conv_file:
+        with open("anki.txt", 'w', encoding='utf-8') as anki:
+            for line in conv_file:
+                if line.strip().startswith('Q：'):
+                    line = line + "\t"
+                elif line=='\n':
+                    line = line.strip() + '\t' + tag + os.linesep
+                else:
+                    pass
+                anki.write(line)
+
+convert_evernote_to_anki("test.txt", "上司喂养手册")
