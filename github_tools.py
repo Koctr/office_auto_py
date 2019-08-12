@@ -45,3 +45,4 @@ def push(**repo):
 # todo
 # 记录程序运行日志
 # 使用正则表达式获取所有库名称，获取分页数（先不实现）
+# git clone --branch master git@github.com:sixstars/ctf ctf --depth 1 
