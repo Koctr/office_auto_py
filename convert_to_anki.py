@@ -51,4 +51,4 @@ def convert_evernote_to_anki(init_file_name, tag):
                 anki.write(line)
 
 
-convert_evernote_to_anki("test.txt", "个人管理")
+convert_evernote_to_anki("test.txt", "上司喂养手册")
