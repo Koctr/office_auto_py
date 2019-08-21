@@ -8,35 +8,30 @@ import re
 
 def clone(*username):
     """
-    克隆username所有仓库
+    使用python获取github上一个用户的所有仓库
+    1. 使用BeautifulSoup获取链接内容，注意404的情况
+    2. 分析是否分页
+    3. 分析a标签列表中的内容，判断是否为仓库
+    4. 根据分析出的仓库逐个clone
     :param username: git 用户名
     :return:
     """
     pass
 
 
-def check(*username):
+def pull(*username):
     """
-    检查usernam所有仓库是否更新
+    与用户的远程仓库同步，可以同步clone的仓库
     :param username:git 用户名
     :return:
     """
     pass
 
 
-def pull(**repo):
+def push(*username):
     """
-    与远程库同步
-    :param repo:远程仓库名称
-    :return:
-    """
-    pass
-
-
-def push(**repo):
-    """
-    提交修改到元仓库
-    :param repo: 远程仓库名称
+    提交所有修改到用户的远程仓库
+    :param username: git 用户名
     :return:
     """
     pass
