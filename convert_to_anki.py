@@ -30,25 +30,28 @@ def convert_to_anki1(init_file_name, tag):
                     anki.write(line.strip())
 
 
-def convert_evernote_to_anki(init_file_name, tag):
+def convert_evernote_to_anki(init_file_name):
     """
     将Q&A笔记转换为导入anki的文件
     :param init_file_name: 从Q&A笔记中拷贝出来的文字形成的文件，最后要有两个空行
-    :param tag: anki中的标签
     :return:
     """
+    tag = ""
+    w_line = ""
     with open(init_file_name, 'r', encoding="utf-8") as conv_file:
         with open("anki.txt", 'w', encoding='utf-8') as anki:
             for line in conv_file:
-                if line.strip().startswith('Q：'):
-                    line = line.rstrip() + "\t"
+                if line.strip().startswith("TAG："):
+                    tag = line.strip().replace("TAG：", "")
+                elif line.strip().startswith('Q：'):
+                    w_line = line.rstrip() + "\t"
                 elif line.strip().startswith("A："):
-                    line = '"' + line.lstrip()
+                    w_line = '"' + line.lstrip()
                 elif line == '\n':
-                    line = '"' + line.rstrip() + '\t' + tag + os.linesep
+                    w_line = '"' + line.rstrip() + '\t' + tag + os.linesep
                 else:
-                    pass
-                anki.write(line)
+                    w_line = line
+                anki.write(w_line)
 
 
-convert_evernote_to_anki("init.txt", "全栈网络安全专家")
+convert_evernote_to_anki("init.txt")
