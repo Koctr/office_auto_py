@@ -33,7 +33,10 @@ def convert_to_anki1(init_file_name, tag):
 def convert_evernote_to_anki(init_file_name):
     """
     将Q&A笔记转换为导入anki的文件
-    :param init_file_name: 从Q&A笔记中拷贝出来的文字形成的文件，最后要有两个空行
+    :param init_file_name:
+        从Q&A笔记中拷贝出来的文字形成的文件
+        每一组卡片的第一行是tag
+        最后要有两个空行
     :return:
     """
     tag = ""
@@ -43,6 +46,8 @@ def convert_evernote_to_anki(init_file_name):
             for line in conv_file:
                 if line.strip().startswith("TAG："):
                     tag = line.strip().replace("TAG：", "")
+                    # 查找到tag时要清除上一条卡片的w_line
+                    w_line = ""
                 elif line.strip().startswith('Q：'):
                     w_line = line.rstrip() + "\t"
                 elif line.strip().startswith("A："):
